@@ -1,0 +1,35 @@
+{
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.12",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.0",
+    "gravatar": "^1.8.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.9.1",
+    "request": "^2.88.2"
+  },
+  "name": "devconnector",
+  "description": "Social Network for Developers",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/behi22/DevConnector.git"
+  },
+  "author": "Behbod Babai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/behi22/DevConnector/issues"
+  },
+  "homepage": "https://github.com/behi22/DevConnector#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.9"
+  }
+}
