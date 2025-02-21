@@ -7,6 +7,7 @@ const { check, validationResult } = require('express-validator');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const Post = require('../../models/Post');
 
 // @route   GET api/profile/me
 // @desc    Get current user's profile
@@ -39,8 +40,8 @@ router.post(
   [
     auth,
     [
-      check('status', 'Status is required!').not().isEmpty(),
-      check('skills', 'Skills is required!').not().isEmpty(),
+      check('status', 'Status is required').not().isEmpty(),
+      check('skills', 'Skills is required').not().isEmpty(),
     ],
   ],
   async (req, res) => {
@@ -74,7 +75,9 @@ router.post(
     if (status) profileFields.status = status;
     if (githubusername) profileFields.githubusername = githubusername;
     if (skills) {
-      profileFields.skills = skills.split(',').map((skill) => skill.trim());
+      profileFields.skills = Array.isArray(skills)
+        ? skills
+        : skills.split(',').map((skill) => ' ' + skill.trim());
     }
 
     // Build social object
@@ -150,8 +153,8 @@ router.get('/user/:user_id', async (req, res) => {
 // @access  Private
 router.delete('/', auth, async (req, res) => {
   try {
-    // @todo - remove users posts
-
+    // Remove User's Posts
+    await Post.deleteMany({ user: req.user.id });
     // Remove Profile
     await Profile.findOneAndDelete({ user: req.user.id });
     // Remove User
