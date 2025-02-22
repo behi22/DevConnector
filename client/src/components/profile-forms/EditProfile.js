@@ -46,7 +46,7 @@ const EditProfile = ({
       youtube: loading || !profile.social ? '' : profile.social.youtube,
       instagram: loading || !profile.social ? '' : profile.social.instagram,
     });
-  }, [loading]);
+  }, [loading, getCurrentProfile]);
 
   const {
     company,
@@ -72,10 +72,10 @@ const EditProfile = ({
   };
 
   return (
-    <Fragment>
-      <h1 className="large text-primary">Create Your Profile</h1>
+    <section className="container">
+      <h1 className="large text-primary">Edit Your Profile</h1>
       <p className="lead">
-        <i className="fas fa-user"></i> Let's get some information to make your
+        <i className="fas fa-user"></i> Let's add some changes to make your
         profile stand out!
       </p>
       <small>* = required field</small>
@@ -242,7 +242,7 @@ const EditProfile = ({
           Go Back
         </Link>
       </form>
-    </Fragment>
+    </section>
   );
 };
 
