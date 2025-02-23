@@ -9,6 +9,7 @@ const ProfileTop = ({
     website,
     social,
     user: { name, avatar },
+    githubusername,
   },
 }) => {
   return (
@@ -23,6 +24,15 @@ const ProfileTop = ({
         {website ? (
           <a href={website} target="_blank" rel="noopener noreferrer">
             <i className="fas fa-globe fa-2x" />
+          </a>
+        ) : null}
+        {githubusername ? (
+          <a
+            href={`https://github.com/${githubusername}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-github fa-2x" />
           </a>
         ) : null}
         {social

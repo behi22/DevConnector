@@ -15,13 +15,18 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
         <div key={repo.id} className="repo bg-white p-1 my-1">
           <div>
             <h4>
-              <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+              <a
+                href={repo.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="repo-url"
+              >
                 {repo.name}
               </a>
             </h4>
-            <p>{repo.description}</p>
+            <p className="repo-description">{repo.description}</p>
           </div>
-          <div>
+          <div className="repo-badges">
             <ul>
               <li className="badge badge-primary">
                 Stars: {repo.stargazers_count}
