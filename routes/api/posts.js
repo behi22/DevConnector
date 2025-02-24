@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator');
 const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+const checkObjectId = require('../../middleware/checkObjectId');
 
 // @route   POST api/posts
 // @desc    Create a post
@@ -55,7 +56,7 @@ router.get('/', auth, async (req, res) => {
 // @route   GET api/posts/:id
 // @desc    Get post by ID
 // @access  Private
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', auth, checkObjectId('id'), async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
@@ -76,7 +77,7 @@ router.get('/:id', auth, async (req, res) => {
 // @route   DELETE api/posts/:id
 // @desc    Delete a post
 // @access  Private
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', [auth, checkObjectId('id')], async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
@@ -104,7 +105,7 @@ router.delete('/:id', auth, async (req, res) => {
 // @route   PUT api/posts/like/:id
 // @desc    Like a post
 // @access  Private
-router.put('/like/:id', auth, async (req, res) => {
+router.put('/like/:id', auth, checkObjectId('id'), async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
@@ -137,7 +138,7 @@ router.put('/like/:id', auth, async (req, res) => {
 // @route   PUT api/posts/unlike/:id
 // @desc    Unlike a post
 // @access  Private
-router.put('/unlike/:id', auth, async (req, res) => {
+router.put('/unlike/:id', auth, checkObjectId('id'), async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
@@ -177,7 +178,9 @@ router.put('/unlike/:id', auth, async (req, res) => {
 // @access  Private
 router.post(
   '/comment/:id',
-  [auth, [check('text', 'Text is required!').not().isEmpty()]],
+  auth,
+  checkObjectId('id'),
+  check('text', 'Text is required').notEmpty(),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -188,15 +191,11 @@ router.post(
       const user = await User.findById(req.user.id).select('-password');
       const post = await Post.findById(req.params.id);
 
-      if (!post) {
-        return res.status(404).json({ msg: 'Post not found!' });
-      }
-
       const newComment = {
-        user: req.user.id,
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
+        user: req.user.id,
       };
 
       post.comments.unshift(newComment);
@@ -206,9 +205,6 @@ router.post(
       res.json(post.comments);
     } catch (err) {
       console.error(err.message);
-      if (err.kind === 'ObjectId') {
-        return res.status(404).json({ msg: 'Post not found!' });
-      }
       res.status(500).send('Server Error');
     }
   }
