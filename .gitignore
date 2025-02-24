@@ -1,4 +1,6 @@
 node_modules/
+package-lock.json
+client/package-lock.json
 config/default.json
 client/build
 client/.eslintcache

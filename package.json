@@ -2,6 +2,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.3.12",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-validator": "^7.2.0",
     "gravatar": "^1.8.2",
@@ -20,6 +21,7 @@
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
+    "build": "npm install --prefix ./client && npm run build --prefix ./client && npm install",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
@@ -37,8 +39,5 @@
     "concurrently": "^9.1.0",
     "nodemon": "^3.1.9"
   },
-  "engines": {
-    "node": "22.x",
-    "npm": "8.x"
-  }
+  "type": "module"
 }

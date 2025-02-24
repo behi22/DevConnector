@@ -1,13 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const gravatar = require('gravatar');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const { check, validationResult } = require('express-validator');
-const normalize = require('normalize-url');
+import express from 'express';
+import gravatar from 'gravatar';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { check, validationResult } from 'express-validator';
+import normalize from 'normalize-url';
 
-const User = require('../../models/User');
+import User from '../../models/User.js';
+
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables
+
+const router = express.Router();
 
 // @route   POST api/users
 // @desc    Register user
@@ -73,7 +77,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        process.env.JWT_SECRET,
         { expiresIn: 3600 },
         (err, token) => {
           if (err) throw err;
@@ -88,4 +92,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export default router;

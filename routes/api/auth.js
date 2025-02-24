@@ -1,12 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcryptjs');
-const auth = require('../../middleware/auth');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const { check, validationResult } = require('express-validator');
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { check, validationResult } from 'express-validator';
+import auth from '../../middleware/auth.js';
+import User from '../../models/User.js';
+import dotenv from 'dotenv';
 
-const User = require('../../models/User');
+dotenv.config(); // Load environment variables
+
+const router = express.Router();
 
 // @route   GET api/auth
 // @desc    Test route
@@ -64,7 +66,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        process.env.JWT_SECRET,
         { expiresIn: 3600 },
         (err, token) => {
           if (err) throw err;
@@ -79,4 +81,4 @@ router.post(
   }
 );
 
-module.exports = router;
+export default router;

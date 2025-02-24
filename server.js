@@ -1,6 +1,14 @@
-const express = require('express');
-const connectDB = require('./config/db');
-const path = require('path');
+import express from 'express';
+import connectDB from './config/db.js';
+import path from 'path';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+
+dotenv.config(); // Load environment variables
+
+// Resolving dirname for ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -10,24 +18,25 @@ connectDB();
 // Init Middleware
 app.use(express.json());
 
-// app.get('/', (req, res) => res.send('API Running'));
+// Define Routes using import
+import usersRouter from './routes/api/users.js';
+import authRouter from './routes/api/auth.js';
+import profileRouter from './routes/api/profile.js';
+import postsRouter from './routes/api/posts.js';
 
-// Define Routes
-app.use('/api/users', require('./routes/api/users'));
-app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/profile', require('./routes/api/profile'));
-app.use('/api/posts', require('./routes/api/posts'));
+// Define the API routes
+app.use('/api/users', usersRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/profile', profileRouter);
+app.use('/api/posts', postsRouter);
 
-// Serve static assets in production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('client/build'));
+// Use the client app
+app.use(express.static(path.join(__dirname, '/client/build')));
 
-  // Load index.html file
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
+// Render client for any path
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,15 +1,19 @@
-const express = require('express');
-const request = require('request');
-const config = require('config');
-const router = express.Router();
-const auth = require('../../middleware/auth');
-const { check, validationResult } = require('express-validator');
-const normalize = require('normalize-url');
-const checkObjectId = require('../../middleware/checkObjectId');
+import express from 'express';
+import request from 'request';
+import auth from '../../middleware/auth.js';
+import { check, validationResult } from 'express-validator';
+import normalize from 'normalize-url';
+import checkObjectId from '../../middleware/checkObjectId.js';
 
-const Profile = require('../../models/Profile');
-const User = require('../../models/User');
-const Post = require('../../models/Post');
+import Profile from '../../models/Profile.js';
+import User from '../../models/User.js';
+import Post from '../../models/Post.js';
+
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables
+
+const router = express.Router();
 
 // @route   GET api/profile/me
 // @desc    Get current user's profile
@@ -324,11 +328,7 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 router.get('/github/:username', (req, res) => {
   try {
     const options = {
-      uri: `https://api.github.com/users/${
-        req.params.username
-      }/repos?per_page=5&sort=created:asc&client_id=${config.get(
-        'githubClientId'
-      )}&client_secret=${config.get('githubSecret')}`,
+      uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${process.env.GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_SECRET}`,
       method: 'GET',
       headers: { 'user-agent': 'node.js' },
     };
@@ -348,4 +348,4 @@ router.get('/github/:username', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
