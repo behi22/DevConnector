@@ -37,6 +37,7 @@ const AddExperience = ({ addExperience }) => {
           e.preventDefault();
           addExperience(formData).then(() => navigate('/dashboard'));
         }}
+        autoComplete="off"
       >
         <div className="form-group">
           <input
@@ -46,6 +47,7 @@ const AddExperience = ({ addExperience }) => {
             value={title}
             onChange={(e) => onChange(e)}
             required
+            autoComplete="job-title"
           />
         </div>
         <div className="form-group">
@@ -56,6 +58,7 @@ const AddExperience = ({ addExperience }) => {
             value={company}
             onChange={(e) => onChange(e)}
             required
+            autoComplete="organization"
           />
         </div>
         <div className="form-group">
@@ -65,6 +68,7 @@ const AddExperience = ({ addExperience }) => {
             name="location"
             value={location}
             onChange={(e) => onChange(e)}
+            autoComplete="address-level2"
           />
         </div>
         <div className="form-group">

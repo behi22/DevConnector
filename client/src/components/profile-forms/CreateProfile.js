@@ -55,7 +55,7 @@ const CreateProfile = ({ createProfile }) => {
         profile stand out!
       </p>
       <small>* = required field</small>
-      <form className="form" onSubmit={(e) => onSubmit(e)}>
+      <form className="form" onSubmit={(e) => onSubmit(e)} autoComplete="off">
         <div className="form-group">
           <select name="status" value={status} onChange={(e) => onChange(e)}>
             <option value="0">* Select Professional Status</option>
@@ -79,6 +79,7 @@ const CreateProfile = ({ createProfile }) => {
             name="company"
             value={company}
             onChange={(e) => onChange(e)}
+            autoComplete="organization"
           />
           <small className="form-text">
             Could be your own company or one you work for
@@ -91,6 +92,7 @@ const CreateProfile = ({ createProfile }) => {
             name="website"
             value={website}
             onChange={(e) => onChange(e)}
+            autoComplete="url"
           />
           <small className="form-text">
             Could be your own or a company website
@@ -103,6 +105,7 @@ const CreateProfile = ({ createProfile }) => {
             name="location"
             value={location}
             onChange={(e) => onChange(e)}
+            autoComplete="address-level2"
           />
           <small className="form-text">
             City & Province(State) suggested (eg. Vancouver, BC)
@@ -139,6 +142,7 @@ const CreateProfile = ({ createProfile }) => {
             name="bio"
             value={bio}
             onChange={(e) => onChange(e)}
+            autoComplete="off"
           ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
         </div>
@@ -164,6 +168,7 @@ const CreateProfile = ({ createProfile }) => {
                 name="twitter"
                 value={twitter}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
 
@@ -175,6 +180,7 @@ const CreateProfile = ({ createProfile }) => {
                 name="facebook"
                 value={facebook}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
 
@@ -186,6 +192,7 @@ const CreateProfile = ({ createProfile }) => {
                 name="youtube"
                 value={youtube}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
 
@@ -197,6 +204,7 @@ const CreateProfile = ({ createProfile }) => {
                 name="linkedin"
                 value={linkedin}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
 
@@ -208,6 +216,7 @@ const CreateProfile = ({ createProfile }) => {
                 name="instagram"
                 value={instagram}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
           </Fragment>

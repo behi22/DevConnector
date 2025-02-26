@@ -38,7 +38,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       <p className="lead">
         <i className="fas fa-user"></i> Create Your Account
       </p>
-      <form className="form" onSubmit={(e) => onSubmit(e)}>
+      <form className="form" onSubmit={(e) => onSubmit(e)} autoComplete="off">
         <div className="form-group">
           <input
             type="text"
@@ -47,6 +47,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             value={name}
             onChange={(e) => onChange(e)}
             required
+            autoComplete="name"
           />
         </div>
         <div className="form-group">
@@ -57,10 +58,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             value={email}
             onChange={(e) => onChange(e)}
             required
+            autoComplete="email"
           />
           <small className="form-text">
             This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
+            Gravatar email!
           </small>
         </div>
         <div className="form-group">
@@ -71,6 +73,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             value={password}
             onChange={(e) => onChange(e)}
             minLength="6"
+            autoComplete="new-password"
           />
         </div>
         <div className="form-group">
@@ -81,6 +84,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             value={password2}
             onChange={(e) => onChange(e)}
             minLength="6"
+            autoComplete="new-password"
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Register" />

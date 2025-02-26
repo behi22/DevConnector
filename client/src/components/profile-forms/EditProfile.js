@@ -89,7 +89,7 @@ const EditProfile = ({
         profile stand out!
       </p>
       <small>* = required field</small>
-      <form className="form" onSubmit={(e) => onSubmit(e)}>
+      <form className="form" onSubmit={(e) => onSubmit(e)} autoComplete="off">
         <div className="form-group">
           <select name="status" value={status} onChange={(e) => onChange(e)}>
             <option value="0">* Select Professional Status</option>
@@ -113,6 +113,7 @@ const EditProfile = ({
             name="company"
             value={company}
             onChange={(e) => onChange(e)}
+            autoComplete="organization"
           />
           <small className="form-text">
             Could be your own company or one you work for
@@ -125,6 +126,7 @@ const EditProfile = ({
             name="website"
             value={website}
             onChange={(e) => onChange(e)}
+            autoComplete="url"
           />
           <small className="form-text">
             Could be your own or a company website
@@ -137,6 +139,7 @@ const EditProfile = ({
             name="location"
             value={location}
             onChange={(e) => onChange(e)}
+            autoComplete="address-level2"
           />
           <small className="form-text">
             City & Province(State) suggested (eg. Vancouver, BC)
@@ -173,6 +176,7 @@ const EditProfile = ({
             name="bio"
             value={bio}
             onChange={(e) => onChange(e)}
+            autoComplete="off"
           ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
         </div>
@@ -198,6 +202,7 @@ const EditProfile = ({
                 name="twitter"
                 value={twitter}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
 
@@ -209,6 +214,7 @@ const EditProfile = ({
                 name="facebook"
                 value={facebook}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
 
@@ -220,6 +226,7 @@ const EditProfile = ({
                 name="youtube"
                 value={youtube}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
 
@@ -231,6 +238,7 @@ const EditProfile = ({
                 name="linkedin"
                 value={linkedin}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
 
@@ -242,12 +250,17 @@ const EditProfile = ({
                 name="instagram"
                 value={instagram}
                 onChange={(e) => onChange(e)}
+                autoComplete="off"
               />
             </div>
           </Fragment>
         )}
 
-        <input type="submit" className="btn btn-primary my-1" />
+        <input
+          type="submit"
+          className="btn btn-primary my-1"
+          value="Save Changes"
+        />
         <Link to="/dashboard" className="btn btn-light my-1">
           Go Back
         </Link>

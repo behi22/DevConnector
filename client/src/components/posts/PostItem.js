@@ -36,6 +36,7 @@ const PostItem = ({
           onClick={() => addLike(_id)}
           type="button"
           className="btn btn-light"
+          title="Like"
         >
           <i className="fas fa-thumbs-up" />{' '}
           <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
@@ -44,6 +45,7 @@ const PostItem = ({
           onClick={() => removeLike(_id)}
           type="button"
           className="btn btn-light"
+          title="Remove Your Like"
         >
           <i className="fas fa-thumbs-down" />
         </button>
@@ -60,6 +62,7 @@ const PostItem = ({
             onClick={handleDelete}
             type="button"
             className="btn btn-danger"
+            title="Delete Post"
           >
             <i className="fas fa-times" />
           </button>

@@ -26,6 +26,7 @@ const CommentItem = ({
           onClick={() => deleteComment(postId, _id)}
           type="button"
           className="btn btn-danger"
+          title="Delete Comment"
         >
           <i className="fas fa-times" />
         </button>

@@ -23,7 +23,7 @@ const CommentForm = ({ postId, addComment }) => {
           name="text"
           cols="30"
           rows="5"
-          placeholder="Comment the post"
+          placeholder="Comment on the post"
           value={text}
           onChange={(e) => setText(e.target.value)}
           required
